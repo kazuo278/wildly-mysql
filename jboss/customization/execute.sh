@@ -11,11 +11,9 @@ MYSQL_CONNECTOR_VERSION=${MYSQL_CONNECTOR_VERSION:-'5.1.49'}
 MYSQL_JNDINAME=${MYSQL_JNDINAME:-'java:jboss/datasources/mysqlds'}
 MYSQL_ADDRESS=${MYSQL_ADDRESS:-'localhost'}
 MYSQL_PORT=${MYSQL_PORT:-'3306'}
-MYSQL_DBNAME=${MYSQL_DBNAME:-'db'}
-MYSQL_USERNAME=${MYSQL_USERNAME:-'user'}
-MYSQL_PASSWORD=${MYSQL_PASSWORD:-'password'}
-# \\\\ → \\ シェルのエスケープ文字ため
-# \\ → \ jboss.cliのエスケープ文字のため
+MYSQL_DBNAME=${MYSQL_DBNAME:-'myapp'}
+MYSQL_USERNAME=${MYSQL_USERNAME:-'app_user'}
+MYSQL_PASSWORD=${MYSQL_PASSWORD:-'app_password'}
 CONNECTION_URL="jdbc:mysql://$MYSQL_ADDRESS:$MYSQL_PORT/$MYSQL_DBNAME?useSSL\\=false"
 
 cat $JBOSS_CLI_CMD_FILE
@@ -44,6 +42,9 @@ if [ "$JBOSS_MODE" = "standalone" ]; then
 else
   $JBOSS_CLI -c "/host=*:shutdown"
 fi
+
+echo "=> Copying deploy file"
+cp $JBOSS_HOME/customization/deployments/* $JBOSS_HOME/standalone/deployments/
 
 echo "=> Restarting WildFly"
 $JBOSS_HOME/bin/$JBOSS_MODE.sh -b 0.0.0.0 -c $JBOSS_CONFIG

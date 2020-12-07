@@ -9,5 +9,4 @@ RUN chmod +x /opt/jboss/wildfly/customization/execute.sh \
     && chown jboss:jboss -R /opt/jboss/wildfly/customization
 
 USER jboss
-
 CMD ["/opt/jboss/wildfly/customization/execute.sh"]

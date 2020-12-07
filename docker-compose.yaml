@@ -7,7 +7,6 @@ services:
       - mysql
     ports:
       - 8080:8080
-      - 9990:9990
     environment:
       MYSQL_CONNECTOR_VERSION: 5.1.49
       MYSQL_JNDINAME: java:jboss/datasources/mysqlds
