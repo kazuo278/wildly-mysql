@@ -37,8 +37,8 @@ WildflyとMySQLを起動するdocker-composeです。
         - イメージ起動時に実行するシェル
     - mysql-connector-java-5.1.49
         - MySQL JDBCドライバ
-- jboss/deployments
-    - デプロイするアプリケーションのファイルを格納する
+    - /deployments
+        - デプロイするアプリケーションのファイルを格納する
 
 ## MySQL
 
