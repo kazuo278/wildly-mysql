@@ -1,0 +1,29 @@
+version: '3'
+services:
+  jboss:
+    build: jboss
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - 8080:8080
+      - 9990:9990
+    environment:
+      MYSQL_CONNECTOR_VERSION: 5.1.49
+      MYSQL_JNDINAME: java:jboss/datasources/mysqlds
+      MYSQL_ADDRESS: mysql
+      MYSQL_PORT: 3306
+      MYSQL_DBNAME: myapp
+      MYSQL_USERNAME: app_user
+      MYSQL_PASSWORD: app_password
+  mysql:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: myapp
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: app_password
+
